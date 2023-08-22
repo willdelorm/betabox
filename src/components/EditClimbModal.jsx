@@ -42,7 +42,7 @@ const EditClimbModal = ({
           <h2>Edit Climb:</h2>
           <span
             className="fs-6 text-danger text-uppercase"
-            onClick={() => deleteClimb(data)}
+            onClick={() => deleteClimb(data.id)}
           >
             Delete Climb
           </span>
