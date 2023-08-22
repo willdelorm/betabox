@@ -1,0 +1,16 @@
+.log-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 1rem;
+}
+
+.log-btn {
+  background-color: #f6d10b;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+
+  margin: 0 auto;
+  width: 50px;
+}
