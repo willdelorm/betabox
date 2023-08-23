@@ -101,6 +101,7 @@ const NewSession = () => {
     const response = confirm("Are you ready to finish your session?");
 
     if (response) {
+      setIsPaused(true);
       // add current session to session list
       //navigate to home
     }

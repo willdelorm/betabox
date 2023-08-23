@@ -84,7 +84,10 @@ const EditClimbModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasiEffort">
-            <Form.Label>{"RPE: " + data.effort}</Form.Label>
+            <Form.Label>
+              {"RPE: "}
+              <span className="fs-2 fw-bold">{data.effort}</span>
+            </Form.Label>
             <Form.Range
               min={0}
               max={10}
@@ -94,48 +97,90 @@ const EditClimbModal = ({
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicStyles">
+          <Form.Group className="d-flex justify-content-between">
             <Form.Label>Style</Form.Label>
-            <Form.Check
-              inline
-              type="radio"
-              name="style"
-              label="Flash"
-              value="Flash"
-              id="style-flash"
-              checked={data.style === "Flash"}
-              onChange={handleChange}
-            />
-            <Form.Check
-              inline
-              type="radio"
-              name="style"
-              label="Redpoint"
-              value="Redpoint"
-              id="style-redpoint"
-              checked={data.style === "Redpoint"}
-              onChange={handleChange}
-            />
-            <Form.Check
-              inline
-              type="radio"
-              name="style"
-              label="Onsight"
-              value="Onsight"
-              id="style-onsight"
-              checked={data.style === "Onsight"}
-              onChange={handleChange}
-            />
-            <Form.Check
-              inline
-              type="radio"
-              name="style"
-              label="Project"
-              value="Project"
-              id="style-project"
-              checked={data.style === "Project"}
-              onChange={handleChange}
-            />
+            <Form.Group
+              className="mb-3 btn-group btn-group-toggle border"
+              controlId="formBasicStyles"
+              data-toggle="buttons"
+            >
+              <Form.Label
+                className={`btn btn-light btn-sm m-0 ${
+                  data.style === "Flash" ? "active" : ""
+                }`}
+                htmlFor="style-flash"
+              >
+                <Form.Check
+                  inline
+                  type="radio"
+                  className="btn-check"
+                  name="style"
+                  label="Flash"
+                  value="Flash"
+                  id="style-flash"
+                  checked={data.style === "Flash"}
+                  onChange={handleChange}
+                />
+                Flash
+              </Form.Label>
+              <Form.Label
+                className={`btn btn-light btn-sm m-0 ${
+                  data.style === "Redpoint" ? "active" : ""
+                }`}
+                htmlFor="style-redpoint"
+              >
+                <Form.Check
+                  inline
+                  type="radio"
+                  className="btn-check"
+                  name="style"
+                  label="Redpoint"
+                  value="Redpoint"
+                  id="style-redpoint"
+                  checked={data.style === "Redpoint"}
+                  onChange={handleChange}
+                />
+                Redpoint
+              </Form.Label>
+              <Form.Label
+                className={`btn btn-light btn-sm m-0 ${
+                  data.style === "Onsight" ? "active" : ""
+                }`}
+                htmlFor="style-onsight"
+              >
+                <Form.Check
+                  inline
+                  type="radio"
+                  className="btn-check"
+                  name="style"
+                  label="Onsight"
+                  value="Onsight"
+                  id="style-onsight"
+                  checked={data.style === "Onsight"}
+                  onChange={handleChange}
+                />
+                Onsight
+              </Form.Label>
+              <Form.Label
+                className={`btn btn-light btn-sm m-0 ${
+                  data.style === "Project" ? "active" : ""
+                }`}
+                htmlFor="style-project"
+              >
+                <Form.Check
+                  inline
+                  type="radio"
+                  className="btn-check"
+                  name="style"
+                  label="Project"
+                  value="Project"
+                  id="style-project"
+                  checked={data.style === "Project"}
+                  onChange={handleChange}
+                />
+                Project
+              </Form.Label>
+            </Form.Group>
           </Form.Group>
 
           <Form.Group className="mb-3 d-flex justify-content-between">
