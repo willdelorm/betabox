@@ -1,3 +1,5 @@
+// TODO add pause/resume visual for pause button
+
 import { useEffect, useReducer, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 
