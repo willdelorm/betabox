@@ -1,10 +1,18 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Navigation from "../components/Navigation";
-import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import SessionsListItem from "../components/SessionsListItem";
+
+import { SessionsContext } from "../contexts/SessionsContext";
 
 const Home = () => {
+  const sessions = useContext(SessionsContext);
+  console.log(sessions);
+
   const navigate = useNavigate();
 
   return (
@@ -15,14 +23,9 @@ const Home = () => {
         <div>
           Recent Sessions
           <ListGroup>
-            <ListGroup.Item className="d-flex justify-content-between">
-              <h3>Day out with Donny</h3>
-              <Button>{">"}</Button>
-            </ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-            <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+            {sessions.map((session) => (
+              <SessionsListItem key={session.id} session={session} />
+            ))}
           </ListGroup>
         </div>
       </Container>
