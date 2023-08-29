@@ -2,7 +2,6 @@
 
 import { useEffect, useReducer, useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import Timer from "../../components/Timer";
@@ -30,8 +29,6 @@ const BOULDERING_GRADES = [
 ];
 
 const NewSession = () => {
-  const navigate = useNavigate();
-
   const [climbs, dispatch] = useReducer(climbsReducer, []);
   const [editingData, setEditingData] = useState({});
 
@@ -108,30 +105,17 @@ const NewSession = () => {
 
     if (response) {
       setIsPaused(true);
-      // add current session to session list
-      // open modal for session details
       setSessionModalShow(true);
-      //navigate to home
-      // navigate('/home');
     }
   };
 
   // Modal Function
   const [modalShow, setModalShow] = useState(false);
   const [sessionModalShow, setSessionModalShow] = useState(false);
-  const [sessionData, setSessionData] = useState({
-    title: "",
-    notes: "",
-    location: "",
-  });
 
   const handleOpenModal = (props) => {
     setEditingData({ ...props });
     setModalShow(true);
-  };
-
-  const saveSession = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -193,9 +177,7 @@ const NewSession = () => {
       <SessionModal
         isShow={sessionModalShow}
         setShow={setSessionModalShow}
-        data={sessionData}
-        setData={setSessionData}
-        saveSession={saveSession}
+        climbs={climbs}
       />
     </Layout>
   );

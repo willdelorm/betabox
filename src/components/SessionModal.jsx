@@ -1,16 +1,41 @@
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const SessionModal = ({ isShow, setShow, data, setData, saveSession }) => {
+import { Button, Form, Modal } from "react-bootstrap";
+
+import { SessionsDispatchContext } from "../contexts/SessionsContext";
+
+const SessionModal = ({ isShow, setShow, climbs }) => {
+  const [session, setSession] = useState({
+    title: "",
+    notes: "",
+    location: "",
+  });
+
   const handleChange = (e) => {
     let { name, value } = e.target;
 
-    const updatedData = {
-      ...data,
+    setSession({
+      ...session,
       [name]: value,
-    };
-    setData(updatedData);
+    });
+  };
+
+  const dispatch = useContext(SessionsDispatchContext);
+  const navigate = useNavigate();
+
+  const handleSubmitSession = async (e) => {
+    e.preventDefault();
+
+    dispatch({
+      type: "ADD_SESSION",
+      payload: {
+        ...session,
+        climbs,
+      },
+    });
+
+    navigate("/home");
   };
 
   return (
@@ -32,13 +57,13 @@ const SessionModal = ({ isShow, setShow, data, setData, saveSession }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={saveSession}>
+        <Form onSubmit={handleSubmitSession}>
           <Form.Group className="mb-3" controlId="session-title">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
               name="title"
-              value={data.title}
+              value={session.title}
               onChange={handleChange}
             />
           </Form.Group>
@@ -49,7 +74,7 @@ const SessionModal = ({ isShow, setShow, data, setData, saveSession }) => {
               as="textarea"
               rows={3}
               name="notes"
-              value={data.notes}
+              value={session.notes}
               onChange={handleChange}
             />
           </Form.Group>
@@ -59,7 +84,7 @@ const SessionModal = ({ isShow, setShow, data, setData, saveSession }) => {
             <Form.Control
               type="text"
               name="location"
-              value={data.location}
+              value={session.location}
               onChange={handleChange}
             />
           </Form.Group>
