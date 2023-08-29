@@ -1,34 +1,34 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import Navigation from "../components/Navigation";
 import SessionsListItem from "../components/SessionsListItem";
 
 import { SessionsContext } from "../contexts/SessionsContext";
+import Layout from "../components/Layout";
 
 const Home = () => {
   const sessions = useContext(SessionsContext);
-  console.log(sessions);
-
   const navigate = useNavigate();
 
   return (
-    <div className="h-100 d-flex flex-column">
-      <Navigation theme="dark" />
-      <Container className="flex-grow-1">
-        <div className="h-25">Activity</div>
-        <div>
-          Recent Sessions
-          <ListGroup>
-            {sessions.map((session) => (
-              <SessionsListItem key={session.id} session={session} />
-            ))}
-          </ListGroup>
-        </div>
-      </Container>
+    <Layout theme="dark">
+      <div className="h-25 m-3">
+        <h2 className="fs-6 mb-3">Activity</h2>
+      </div>
+      <div className="m-3 flex-grow-1 overflow-auto">
+        <h2 className="fs-6 mb-3">Recent Sessions</h2>
+
+        <ListGroup variant="flush">
+          {sessions.map((session) => (
+            <SessionsListItem key={session.id} session={session} />
+          ))}
+          <ListGroup.Item className="d-flex justify-content-between align-items-center bg-light px-0 py-1">
+            <p className="fs-7 fw-bold my-2">View All</p>
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
       <Button
         variant="dark"
         size="lg"
@@ -37,7 +37,7 @@ const Home = () => {
       >
         Start a session
       </Button>
-    </div>
+    </Layout>
   );
 };
 
