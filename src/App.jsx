@@ -258,7 +258,7 @@ function App() {
   const [sessions, dispatch] = useReducer(sessionsReducer, SESSIONS_DATA);
 
   return (
-    <div className="vw-100 vh-100 bg-light">
+    <div className="w-100 vh-100 bg-light">
       <SessionsContext.Provider value={sessions}>
         <SessionsDispatchContext.Provider value={dispatch}>
           <Routes>
