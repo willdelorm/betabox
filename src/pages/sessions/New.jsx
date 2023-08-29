@@ -2,6 +2,7 @@
 
 import { useEffect, useReducer, useState } from "react";
 import { ListGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import Timer from "../../components/Timer";
@@ -9,6 +10,7 @@ import LogButton from "../../components/LogButton";
 import LoggedClimbRow from "../../components/LoggedClimbRow";
 import ControlButton from "../../components/ControlButton";
 import EditClimbModal from "../../components/EditClimbModal";
+import SessionModal from "../../components/SessionModal";
 
 import climbsReducer from "../../reducers/climbsReducer";
 
@@ -28,11 +30,10 @@ const BOULDERING_GRADES = [
 ];
 
 const NewSession = () => {
+  const navigate = useNavigate();
+
   const [climbs, dispatch] = useReducer(climbsReducer, []);
   const [editingData, setEditingData] = useState({});
-  const [modalShow, setModalShow] = useState(false);
-  const [time, setTime] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   let problemCount = climbs.length ? climbs.length : 0;
   let vSum = climbs.length
@@ -79,6 +80,9 @@ const NewSession = () => {
   };
 
   // Stopwatch Functions
+  const [time, setTime] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
   useEffect(() => {
     let interval = null;
 
@@ -105,14 +109,29 @@ const NewSession = () => {
     if (response) {
       setIsPaused(true);
       // add current session to session list
+      // open modal for session details
+      setSessionModalShow(true);
       //navigate to home
+      // navigate('/home');
     }
   };
 
   // Modal Function
+  const [modalShow, setModalShow] = useState(false);
+  const [sessionModalShow, setSessionModalShow] = useState(false);
+  const [sessionData, setSessionData] = useState({
+    title: "",
+    notes: "",
+    location: "",
+  });
+
   const handleOpenModal = (props) => {
     setEditingData({ ...props });
     setModalShow(true);
+  };
+
+  const saveSession = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -171,6 +190,13 @@ const NewSession = () => {
           }
         />
       </div>
+      <SessionModal
+        isShow={sessionModalShow}
+        setShow={setSessionModalShow}
+        data={sessionData}
+        setData={setSessionData}
+        saveSession={saveSession}
+      />
     </Layout>
   );
 };
