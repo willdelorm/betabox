@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import SessionsListItem from "../components/SessionsListItem";
+import ActivityGraph from "../components/ActivityGraph";
 
 import { SessionsContext } from "../contexts/SessionsContext";
 import Layout from "../components/Layout";
@@ -16,6 +17,7 @@ const Home = () => {
     <Layout theme="dark">
       <div className="h-25 m-3">
         <h2 className="fs-6 mb-3">Activity</h2>
+        <ActivityGraph data={sessions} />
       </div>
       <div className="m-3 flex-grow-1 overflow-auto">
         <h2 className="fs-6 mb-3">Recent Sessions</h2>

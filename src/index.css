@@ -27,3 +27,7 @@ body {
 .fs-8 {
   font-size: 12px;
 }
+
+.graph-container {
+  height: 70%;
+}

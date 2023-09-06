@@ -17,6 +17,7 @@ const SESSIONS_DATA = [
     title: "Tester",
     notes: "",
     location: "",
+    date: new Date(2023, 8, 25),
     climbs: [
       {
         id: "Ap_e82zad6-MDrQwZNoH2",
@@ -55,6 +56,7 @@ const SESSIONS_DATA = [
     title: "test 3",
     notes: "do i nav?",
     location: "office",
+    date: new Date(2023, 8, 23),
     climbs: [
       {
         id: "VfE4OHvT8n5saZMBeTFLD",
@@ -113,6 +115,7 @@ const SESSIONS_DATA = [
     title: "ghj",
     notes: "bnm",
     location: "tyu",
+    date: new Date(2023, 8, 20),
     climbs: [
       {
         id: "FuzrIpfEnyHuutcglwh_L",
@@ -161,6 +164,7 @@ const SESSIONS_DATA = [
     title: "ghj",
     notes: "bnm",
     location: "tyu",
+    date: new Date(2023, 8, 19),
     climbs: [
       {
         id: "FuzrIpfEnyHuutcglwh_L",
@@ -209,6 +213,7 @@ const SESSIONS_DATA = [
     title: "ghj",
     notes: "bnm",
     location: "tyu",
+    date: new Date(2023, 8, 15),
     climbs: [
       {
         id: "FuzrIpfEnyHuutcglwh_L",
