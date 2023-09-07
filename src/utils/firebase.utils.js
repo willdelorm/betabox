@@ -1,8 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
@@ -23,36 +21,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
 const db = getFirestore(app);
 
 // --- AUTHENTICATION FUNCTIONS ---
-const signInWithGoogle = () => {
-  signInWithPopup(auth, googleProvider)
-    .then(async ({ user }) => {
-      if (!user) return;
-
-      const userDocRef = doc(db, "users", user.uid);
-      const userSnapshot = await getDoc(userDocRef);
-
-      if (!userSnapshot.exists()) {
-        const { email } = user;
-        const createdAt = new Date();
-
-        await setDoc(userDocRef, {
-          email,
-          createdAt,
-        }).catch((error) => {
-          console.log("error creating new user", error);
-        });
-      }
-
-      return userSnapshot;
-    })
-    .catch((error) => console.log("error signing in with google", error));
-};
-
 const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
@@ -100,9 +72,4 @@ const signUp = async (email, password) => {
   return user;
 };
 
-export {
-  signInWithGoogle,
-  signInAuthUserWithEmailAndPassword,
-  signOutAuthUser,
-  signUp,
-};
+export { signInAuthUserWithEmailAndPassword, signOutAuthUser, signUp };

@@ -4,10 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGoogle,
-} from "../utils/firebase.utils";
+import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
 import { useNavigate } from "react-router-dom";
 
 const SignInForm = ({ onHide }) => {
