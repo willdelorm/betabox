@@ -65,11 +65,9 @@ const createUserDocumentFromAuth = async (user) => {
   return userSnapshot;
 };
 
-// --- EXTERNAL FUNCTIONS ---
-const signUp = async (email, password) => {
-  const { user } = await createAuthUserWithEmailAndPassword(email, password);
-  await createUserDocumentFromAuth(user);
-  return user;
+export {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
+  signOutAuthUser,
 };
-
-export { signInAuthUserWithEmailAndPassword, signOutAuthUser, signUp };
