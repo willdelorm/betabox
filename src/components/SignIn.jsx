@@ -26,10 +26,6 @@ const SignInForm = ({ onHide }) => {
     setFormFields(updatedData);
   };
 
-  const handleSignInWithGoogle = () => {
-    signInWithGoogle();
-  };
-
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -48,9 +44,9 @@ const SignInForm = ({ onHide }) => {
         <Form.Control
           type="email"
           name="email"
-          placeholder="Enter email"
           value={formFields.email}
           onChange={handleInputChange}
+          required
         />
       </Form.Group>
 
@@ -59,20 +55,17 @@ const SignInForm = ({ onHide }) => {
         <Form.Control
           type="password"
           name="password"
-          placeholder="Password"
           value={formFields.password}
           onChange={handleInputChange}
+          required
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="warning" type="submit" className="me-3">
         Submit
       </Button>
-      <Button variant="outline-primary" onClick={onHide}>
+      <Button variant="outline-warning text-dark" onClick={onHide}>
         Cancel
-      </Button>
-      <Button variant="primary" onClick={handleSignInWithGoogle}>
-        Google
       </Button>
     </Form>
   );
@@ -87,9 +80,7 @@ const SignIn = ({ show, onHide }) => {
       centered
     >
       <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Register / Sign In
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Sign In</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <SignInForm onHide={onHide} />

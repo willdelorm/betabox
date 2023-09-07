@@ -50,13 +50,10 @@ const RegisterForm = ({ onHide }) => {
         <Form.Control
           type="email"
           name="email"
-          placeholder="Enter email"
           value={formFields.email}
           onChange={handleInputChange}
+          required
         />
-        <Form.Text className="text-muted">
-          {"We'll never share your email with anyone else."}
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="registerPassword">
@@ -64,9 +61,9 @@ const RegisterForm = ({ onHide }) => {
         <Form.Control
           type="password"
           name="password"
-          placeholder="Password"
           value={formFields.password}
           onChange={handleInputChange}
+          required
         />
       </Form.Group>
 
@@ -75,20 +72,24 @@ const RegisterForm = ({ onHide }) => {
         <Form.Control
           type="password"
           name="passwordConfirm"
-          placeholder="Password"
           value={formFields.passwordConfirm}
           onChange={handleInputChange}
+          required
         />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="I agree to sign up" />
+        <Form.Check type="checkbox" label="I agree to sign up" required />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="warning" type="submit" className="me-3">
         Submit
       </Button>
-      <Button variant="primary" onClick={onHide}>
+      <Button
+        variant="outline-warning text-dark"
+        className="me-3"
+        onClick={onHide}
+      >
         Cancel
       </Button>
     </Form>
@@ -105,7 +106,7 @@ const Register = ({ show, onHide }) => {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
-          Register / Sign In
+          Create a new account
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
