@@ -1,5 +1,3 @@
-// ? useEffect stopwatch in New.jsx causing console.log to trigger every second
-
 import { Button } from "react-bootstrap";
 import { ButtonGroup } from "react-bootstrap";
 import { Form } from "react-bootstrap";
