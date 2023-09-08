@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
@@ -8,13 +8,19 @@ import ActivityGraph from "../components/ActivityGraph";
 
 import { SessionsContext } from "../contexts/SessionsContext";
 import Layout from "../components/Layout";
-import { getUserDocumentFromAuth } from "../utils/firebase.utils";
+import {
+  addUserSessionFromAuth,
+  getUserSessionsFromAuth,
+} from "../utils/firebase.utils";
 
 const Home = () => {
-  const sessions = useContext(SessionsContext);
+  // const sessions = useContext(SessionsContext);
   const navigate = useNavigate();
+  let sessions = [];
 
-  getUserDocumentFromAuth();
+  useEffect(() => {
+    sessions = getUserSessionsFromAuth();
+  });
 
   return (
     <Layout theme="dark">

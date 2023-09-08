@@ -6,7 +6,15 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDoEbZGlse_HSUsOFTIHS-aAWEGOFZNwXU",
@@ -87,6 +95,21 @@ const getUserSnapshot = async (userId) => {
   }
 };
 
+const getUserSessions = async (userId) => {
+  const sessionsSnapshot = await getDocs(
+    collection(db, "users", userId, "sessions")
+  );
+  return sessionsSnapshot.docs;
+};
+
+const createUserSession = async (userId, session) => {
+  const newSession = await addDoc(
+    collection(db, "users", userId, "sessions"),
+    session
+  );
+  console.log(newSession);
+};
+
 // --- EXPOSED FUNCTIONS ---
 const registerUserWithEmailAndPassword = async (email, password) => {
   const user = await createAuthUserWithEmailAndPassword(email, password);
@@ -99,8 +122,21 @@ const getUserDocumentFromAuth = async () => {
   return getUserSnapshot(userId);
 };
 
+const getUserSessionsFromAuth = async () => {
+  const userId = await getCurrentUserId();
+  const sessionsArray = await getUserSessions(userId);
+  return sessionsArray;
+};
+
+const addUserSessionFromAuth = async (session) => {
+  const userId = await getCurrentUserId();
+  const sessionToAdd = await createUserSession(userId, session);
+};
+
 export {
+  addUserSessionFromAuth,
   getUserDocumentFromAuth,
+  getUserSessionsFromAuth,
   registerUserWithEmailAndPassword,
   signInAuthUserWithEmailAndPassword,
   signOutAuthUser,
