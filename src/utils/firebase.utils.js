@@ -90,7 +90,6 @@ const getUserSnapshot = async (userId) => {
   if (userSnapshot.exists()) {
     console.log("Document data:", userSnapshot.data());
   } else {
-    // userSnapshot.data() will be undefined in this case
     console.log("No such document!");
   }
 };
@@ -103,11 +102,9 @@ const getUserSessions = async (userId) => {
 };
 
 const createUserSession = async (userId, session) => {
-  const newSession = await addDoc(
-    collection(db, "users", userId, "sessions"),
-    session
-  );
-  console.log(newSession);
+  await addDoc(collection(db, "users", userId, "sessions"), session)
+    .then((docRef) => console.log("session added", docRef))
+    .catch((error) => console.log("add session failed", error));
 };
 
 // --- EXPOSED FUNCTIONS ---
