@@ -8,61 +8,26 @@ import { ResponsiveBar } from "@nivo/bar";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const MyResponsiveBar = ({ data /* see data tab */ }) => {
-  const barData = [];
-  data.forEach((session) => {
-    const { id, date, climbs } = session;
-    const value =
-      Math.round(
-        (climbs.reduce((acc, climb) => acc + climb.grade, 0) / climbs.length) *
-          100
-      ) / 100;
-    barData.push({
+  const barData = data.map((session) => {
+    const { climbs, id, startTime } = session;
+
+    return {
       id,
-      date: date.toLocaleDateString("en-us", {
+      date: new Date(startTime.toDate()).toLocaleDateString("en-us", {
         year: "2-digit",
         month: "2-digit",
         day: "2-digit",
       }),
       value: climbs.length,
-    });
+    };
   });
 
   return (
     <ResponsiveBar
       data={barData}
-      // keys={["avgV"]}
-      indexBy="date"
       margin={{ top: 10, right: 10, bottom: 30, left: 30 }}
       padding={0.3}
-      // valueScale={{ type: "linear" }}
-      // indexScale={{ type: "band", round: true }}
       colors={{ scheme: "accent" }}
-      // defs={[
-      //   {
-      //     id: "dots",
-      //     type: "patternDots",
-      //     background: "inherit",
-      //     color: "#38bcb2",
-      //     size: 4,
-      //     padding: 1,
-      //     stagger: true,
-      //   },
-      //   {
-      //     id: "lines",
-      //     type: "patternLines",
-      //     background: "inherit",
-      //     color: "#eed312",
-      //     rotation: -45,
-      //     lineWidth: 6,
-      //     spacing: 10,
-      //   },
-      // ]}
-      // borderColor={{
-      //   from: "color",
-      //   modifiers: [["darker", 1.6]],
-      // }}
-      // axisTop={null}
-      // axisRight={null}
       axisBottom={{
         tickSize: 0,
         tickPadding: 5,
@@ -73,17 +38,6 @@ const MyResponsiveBar = ({ data /* see data tab */ }) => {
         tickPadding: 5,
         tickRotation: 0,
       }}
-      // labelSkipWidth={12}
-      // labelSkipHeight={12}
-      // labelTextColor={{
-      //   from: "color",
-      //   modifiers: [["darker", 1.6]],
-      // }}
-      // role="application"
-      // ariaLabel="Nivo bar chart demo"
-      // barAriaLabel={(e) =>
-      //   e.id + ": " + e.formattedValue + " in country: " + e.indexValue
-      // }
     />
   );
 };
