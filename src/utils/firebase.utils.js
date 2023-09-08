@@ -99,7 +99,7 @@ const getUserSessions = async (userId) => {
   const sessionsSnapshot = await getDocs(
     collection(db, "users", userId, "sessions")
   );
-  return sessionsSnapshot.docs;
+  return sessionsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
 const createUserSession = async (userId, session) => {
@@ -130,7 +130,7 @@ const getUserSessionsFromAuth = async () => {
 
 const addUserSessionFromAuth = async (session) => {
   const userId = await getCurrentUserId();
-  const sessionToAdd = await createUserSession(userId, session);
+  await createUserSession(userId, session);
 };
 
 export {

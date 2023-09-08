@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Modal } from "react-bootstrap";
 
 import { SessionsDispatchContext } from "../contexts/SessionsContext";
+import { addUserSessionFromAuth } from "../utils/firebase.utils";
 
 const SessionModal = ({ isShow, setShow, climbs }) => {
   const [session, setSession] = useState({
     title: "",
     notes: "",
     location: "",
+    startTime: new Date(),
   });
 
   const handleChange = (e) => {
@@ -27,13 +29,12 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
   const handleSubmitSession = async (e) => {
     e.preventDefault();
 
-    dispatch({
-      type: "ADD_SESSION",
-      payload: {
-        ...session,
-        climbs,
-      },
-    });
+    const sessionToAdd = {
+      ...session,
+      climbs,
+      endTime: new Date(),
+    };
+    addUserSessionFromAuth(sessionToAdd);
 
     navigate("/home");
   };
