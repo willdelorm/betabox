@@ -8,10 +8,13 @@ import ActivityGraph from "../components/ActivityGraph";
 
 import { SessionsContext } from "../contexts/SessionsContext";
 import Layout from "../components/Layout";
+import { getUserDocumentFromAuth } from "../utils/firebase.utils";
 
 const Home = () => {
   const sessions = useContext(SessionsContext);
   const navigate = useNavigate();
+
+  getUserDocumentFromAuth();
 
   return (
     <Layout theme="dark">

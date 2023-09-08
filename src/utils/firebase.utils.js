@@ -3,6 +3,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
@@ -47,38 +48,59 @@ const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 const signOutAuthUser = async () => signOut(auth);
 
+const getCurrentUserId = () => {
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      unsubscribe();
+      resolve(userAuth.uid);
+    });
+  });
+};
+
 // --- DATABASE FUNCTIONS ---
-const createUserDocumentFromAuth = async (user) => {
+const createUserCollectionAndDocuments = async (user) => {
   if (!user) return;
 
-  const userDocRef = doc(db, "users", user.uid);
-  const userSnapshot = await getDoc(userDocRef);
-
-  if (!userSnapshot.exists()) {
+  try {
     const { email } = user;
     const createdAt = new Date();
 
-    await setDoc(userDocRef, {
+    const userDocRef = await setDoc(doc(db, "users", user.uid), {
       email,
       createdAt,
-    }).catch((error) => {
-      console.log("error creating new user", error);
     });
+    console.log("user created", userDocRef);
+  } catch (error) {
+    console.log(error);
   }
+};
 
-  return userSnapshot;
+const getUserSnapshot = async (userId) => {
+  const userDocRef = doc(db, "users", userId);
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (userSnapshot.exists()) {
+    console.log("Document data:", userSnapshot.data());
+  } else {
+    // userSnapshot.data() will be undefined in this case
+    console.log("No such document!");
+  }
 };
 
 // --- EXPOSED FUNCTIONS ---
 const registerUserWithEmailAndPassword = async (email, password) => {
   const user = await createAuthUserWithEmailAndPassword(email, password);
-  // await createUserDocumentFromAuth(user);
+  await createUserCollectionAndDocuments(user);
   return user;
 };
 
+const getUserDocumentFromAuth = async () => {
+  const userId = await getCurrentUserId();
+  return getUserSnapshot(userId);
+};
+
 export {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
+  getUserDocumentFromAuth,
   registerUserWithEmailAndPassword,
   signInAuthUserWithEmailAndPassword,
   signOutAuthUser,
