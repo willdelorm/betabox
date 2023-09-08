@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { addUserSessionFromAuth } from "../utils/firebase.utils";
 
 import { Button, Form, Modal } from "react-bootstrap";
-
-import { SessionsDispatchContext } from "../contexts/SessionsContext";
-import { addUserSessionFromAuth } from "../utils/firebase.utils";
 
 const SessionModal = ({ isShow, setShow, climbs }) => {
   const [session, setSession] = useState({
@@ -23,7 +21,6 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
     });
   };
 
-  const dispatch = useContext(SessionsDispatchContext);
   const navigate = useNavigate();
 
   const handleSubmitSession = async (e) => {

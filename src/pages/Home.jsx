@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserSessionsFromAuth } from "../utils/firebase.utils";
 
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import SessionsListItem from "../components/SessionsListItem";
-import ActivityGraph from "../components/ActivityGraph";
 
 import Layout from "../components/Layout";
-import { getUserSessionsFromAuth } from "../utils/firebase.utils";
+import ActivityGraph from "../components/ActivityGraph";
+import SessionsListItem from "../components/SessionsListItem";
 
 const Home = () => {
   const navigate = useNavigate();
