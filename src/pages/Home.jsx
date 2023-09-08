@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
@@ -6,18 +6,15 @@ import ListGroup from "react-bootstrap/ListGroup";
 import SessionsListItem from "../components/SessionsListItem";
 import ActivityGraph from "../components/ActivityGraph";
 
-import { SessionsContext } from "../contexts/SessionsContext";
 import Layout from "../components/Layout";
 import { getUserSessionsFromAuth } from "../utils/firebase.utils";
 
 const Home = () => {
-  // const sessions = useContext(SessionsContext);
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
 
   useEffect(() => {
     getUserSessionsFromAuth().then((arr) => {
-      console.log("array", arr);
       setSessions(arr);
     });
   }, []);
