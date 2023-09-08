@@ -28,17 +28,21 @@ const db = getFirestore(app);
 const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return await createUserWithEmailAndPassword(auth, email, password);
+  return await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      return userCredential.user;
+    })
+    .catch(console.log);
 };
 
 const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-  try {
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
-    return user;
-  } catch (error) {
-    console.log("error signing in with email and password", error);
-  }
+
+  return await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      return userCredential.user;
+    })
+    .catch(console.log);
 };
 
 const signOutAuthUser = async () => signOut(auth);
@@ -65,9 +69,17 @@ const createUserDocumentFromAuth = async (user) => {
   return userSnapshot;
 };
 
+// --- EXPOSED FUNCTIONS ---
+const registerUserWithEmailAndPassword = async (email, password) => {
+  const user = await createAuthUserWithEmailAndPassword(email, password);
+  // await createUserDocumentFromAuth(user);
+  return user;
+};
+
 export {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  registerUserWithEmailAndPassword,
   signInAuthUserWithEmailAndPassword,
   signOutAuthUser,
 };

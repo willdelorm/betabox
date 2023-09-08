@@ -1,19 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../utils/firebase.utils";
+import { registerUserWithEmailAndPassword } from "../utils/firebase.utils";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-
-const createAuthUserAndDocument = async (email, password) => {
-  const { user } = await createAuthUserWithEmailAndPassword(email, password);
-  await createUserDocumentFromAuth(user);
-  return user;
-};
 
 const RegisterForm = ({ onHide }) => {
   const [formFields, setFormFields] = useState({
@@ -45,7 +36,7 @@ const RegisterForm = ({ onHide }) => {
       return;
     }
 
-    createAuthUserAndDocument(email, password).then((user) => {
+    registerUserWithEmailAndPassword(email, password).then((user) => {
       if (user && user.email) {
         navigate("home");
       }
