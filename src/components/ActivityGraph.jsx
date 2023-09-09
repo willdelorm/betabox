@@ -10,14 +10,10 @@ import { ResponsiveBar } from "@nivo/bar";
 const MyResponsiveBar = ({ data /* see data tab */ }) => {
   const barData = data.map((session) => {
     const { climbs, id, startTime } = session;
-
+    const date = new Date(startTime.toDate()).toLocaleDateString("en-us");
     return {
       id,
-      date: new Date(startTime.toDate()).toLocaleDateString("en-us", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-      }),
+      date,
       value: climbs.length,
     };
   });
