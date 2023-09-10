@@ -3,6 +3,10 @@ body {
   margin: 0 auto;
 }
 
+p {
+  margin: 0;
+}
+
 .log-btn-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

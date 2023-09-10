@@ -34,7 +34,12 @@ const Home = () => {
               <SessionsListItem key={session.id} session={session} />
             ))}
           <ListGroup.Item className="d-flex justify-content-between align-items-center bg-light px-0 py-1">
-            <p className="fs-7 fw-bold my-2">View All</p>
+            <p
+              className="fs-7 fw-bold my-2"
+              onClick={() => navigate("/history")}
+            >
+              View All
+            </p>
           </ListGroup.Item>
         </ListGroup>
       </div>

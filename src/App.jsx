@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Splash from "./pages/Splash";
 import NewSession from "./pages/sessions/New";
+import History from "./pages/History";
 
 const SESSIONS_DATA = [
   {
@@ -258,6 +259,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/history" element={<History />} />
         <Route path="/sessions/new" element={<NewSession />} />
       </Routes>
     </div>
