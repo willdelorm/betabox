@@ -22,10 +22,11 @@ const Navigation = ({ theme }) => {
     >
       <Container>
         <Navbar.Brand>BetaBox</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/history">History</Nav.Link>
             <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
