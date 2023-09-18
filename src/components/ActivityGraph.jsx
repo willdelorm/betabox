@@ -23,7 +23,7 @@ const MyResponsiveBar = ({ data /* see data tab */ }) => {
       data={barData}
       margin={{ top: 10, right: 10, bottom: 30, left: 30 }}
       padding={0.3}
-      colors={{ scheme: "accent" }}
+      colors={"#f6d10b"}
       axisBottom={{
         tickSize: 0,
         tickPadding: 5,
