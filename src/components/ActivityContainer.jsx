@@ -2,43 +2,16 @@ import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import ActivityGraph from "./ActivityGraph";
 import ActivityDropdown from "./ActivityDropdown";
-import {
-  getStartOfMonth,
-  getLast3Months,
-  getLast6Months,
-  getStartOfYear,
-} from "../utils/filter.utils";
+import { getBarData } from "../utils/filter.utils";
 
-const TIME_OPTIONS = [
-  "This month",
-  "Latest 3 months",
-  "Latest 6 months",
-  "This year",
-  "Last year",
-];
+const TIME_OPTIONS = ["This month", "Latest 3 months", "Latest 6 months"];
 const DATA_OPTIONS = ["Total sessions"];
 
 const ActivityContainer = ({ sessions }) => {
   const [timeFilter, setTimeFilter] = useState(TIME_OPTIONS[0]);
   const [dataFilter, setDataFilter] = useState(DATA_OPTIONS[0]);
 
-  const filteredDataByTime = sessions.filter((session) => {
-    const sessionStartTime = new Date(session.startTime.seconds * 1000);
-
-    switch (timeFilter) {
-      case "This month":
-        return sessionStartTime >= getStartOfMonth();
-      case "Latest 3 months":
-        return sessionStartTime >= getLast3Months();
-      case "Latest 6 months":
-        return sessionStartTime >= getLast6Months();
-      case "This year":
-        return sessionStartTime >= getStartOfYear();
-      default:
-        return true;
-    }
-  });
-  console.log("filtered", filteredDataByTime);
+  const barData = getBarData(sessions, timeFilter, dataFilter);
 
   return (
     <div className="m-3 mb-0">
@@ -60,7 +33,7 @@ const ActivityContainer = ({ sessions }) => {
         </Col>
       </Row>
       <div className="graph-container">
-        <ActivityGraph data={sessions} />
+        <ActivityGraph data={barData} />
       </div>
     </div>
   );
