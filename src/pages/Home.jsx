@@ -4,14 +4,12 @@ import { getUserSessionsFromAuth } from "../utils/firebase.utils";
 import { loadModal } from "../utils/modal.utils";
 
 import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Row, Col } from "react-bootstrap";
 
 import Layout from "../components/Layout";
-import ActivityGraph from "../components/ActivityGraph";
 import SessionsListItem from "../components/SessionsListItem";
 import ViewSessionModal from "../components/ViewSessionModal";
+import ActivityContainer from "../components/ActivityContainer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -39,52 +37,7 @@ const Home = () => {
 
   return (
     <Layout theme="dark">
-      <div className="activity m-3">
-        <h2 className="fs-6 mb-3">Activity</h2>
-        <Row className="mb-3">
-          <Col>
-            <Dropdown className="flex-fill">
-              <Dropdown.Toggle
-                variant="outline-dark"
-                id="dropdown-time"
-                className="w-100"
-              >
-                Last 6 months
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">This week</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">Last week</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Last month</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Last 3 months</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Last 6 months</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Last year</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
-          <Col>
-            <Dropdown className="flex-fill">
-              <Dropdown.Toggle
-                variant="outline-dark"
-                id="dropdown-filter"
-                className="w-100"
-              >
-                Total Sessions
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Header disabled={true}>Bouldering</Dropdown.Header>
-                <Dropdown.Item href="#/action-1">Total Sessions</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Average Grade</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Average Effort</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
-        </Row>
-        <div className="graph-container">
-          <ActivityGraph data={sessions} />
-        </div>
-      </div>
+      <ActivityContainer sessions={sessions} />
       <div className="m-3 mt-0 flex-grow-1 overflow-auto">
         <h2 className="fs-6 mb-3">Recent Sessions</h2>
 
