@@ -1,4 +1,5 @@
-// TODO add pause/resume visual for pause button
+// ? Why do ControlButton components re-render with useEffect
+// TODO Re-render play/pause on click
 
 import { useEffect, useReducer, useState } from "react";
 import { ListGroup } from "react-bootstrap";
@@ -62,18 +63,12 @@ const NewSession = () => {
   };
 
   const handleDeleteClimb = (climbId) => {
-    const confirmDelete = confirm(
-      "Are you sure you want to delete this climb?"
-    );
+    dispatch({
+      type: "DELETE_CLIMB",
+      id: climbId,
+    });
 
-    if (confirmDelete) {
-      dispatch({
-        type: "DELETE_CLIMB",
-        id: climbId,
-      });
-
-      setModalShow(false);
-    }
+    setModalShow(false);
   };
 
   // Stopwatch Functions
@@ -101,12 +96,8 @@ const NewSession = () => {
   };
 
   const handleStop = () => {
-    const response = confirm("Are you ready to finish your session?");
-
-    if (response) {
-      setIsPaused(true);
-      setSessionModalShow(true);
-    }
+    setIsPaused(true);
+    setSessionModalShow(true);
   };
 
   // Modal Function
@@ -165,7 +156,10 @@ const NewSession = () => {
 
       {/* Play Controls */}
       <div className="d-flex justify-content-around my-3">
-        <ControlButton name="pause" handleClick={togglePause} />
+        <ControlButton
+          name={isPaused ? "play" : "pause"}
+          handleClick={togglePause}
+        />
         <ControlButton name="stop" handleClick={handleStop} />
         <ControlButton
           name="undo"
@@ -178,6 +172,7 @@ const NewSession = () => {
         isShow={sessionModalShow}
         setShow={setSessionModalShow}
         climbs={climbs}
+        togglePause={togglePause}
       />
     </Layout>
   );
