@@ -2,25 +2,39 @@ import { Button, ListGroup, Modal } from "react-bootstrap";
 import { sessionStats } from "../utils/session.utils";
 
 import HistoryStat from "./HistoryStat";
+import { deleteUserSessionFromAuth } from "../utils/firebase.utils";
+import { useNavigate } from "react-router-dom";
 
 const ViewSessionModal = ({ show, data, handleHide }) => {
   const { climbs, endTime, id, location, notes, startTime, title } = data;
   const { problemsCount, vSum, avgRpe, avgV } = sessionStats(climbs);
+  const navigate = useNavigate();
+
+  const deleteSession = () => {
+    const isConfirmed = confirm(
+      "Are you sure you want to delete this session?"
+    );
+
+    if (isConfirmed) {
+      deleteUserSessionFromAuth(data).then(() => {
+        window.location.reload(true);
+      });
+    }
+  };
 
   return (
-    <Modal
-      show={show}
-      // size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      // dialogClassName="session-modal"
-    >
+    <Modal show={show} aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100">
           <h2 className="mb-3">{title}</h2>
           <div className="d-flex justify-content-between align-items-center fs-6">
             <p>Session Detail:</p>
-            <span className="text-danger text-uppercase">Delete</span>
+            <span
+              className="text-danger text-uppercase"
+              onClick={deleteSession}
+            >
+              Delete
+            </span>
           </div>
         </Modal.Title>
       </Modal.Header>

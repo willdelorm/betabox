@@ -9,6 +9,7 @@ import {
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -102,9 +103,15 @@ const getUserSessions = async (userId) => {
 };
 
 const createUserSession = async (userId, session) => {
-  await addDoc(collection(db, "users", userId, "sessions"), session)
-    .then((docRef) => console.log("session added", docRef))
-    .catch((error) => console.log("add session failed", error));
+  await addDoc(collection(db, "users", userId, "sessions"), session).catch(
+    (error) => console.log("add session failed", error)
+  );
+};
+
+const deleteUserSession = async (userId, session) => {
+  await deleteDoc(doc(db, "users", userId, "sessions", session.id)).catch(
+    (error) => console.log("deleteUserSession", error)
+  );
 };
 
 // --- EXPOSED FUNCTIONS ---
@@ -130,8 +137,14 @@ const addUserSessionFromAuth = async (session) => {
   await createUserSession(userId, session);
 };
 
+const deleteUserSessionFromAuth = async (session) => {
+  const userId = await getCurrentUserId();
+  await deleteUserSession(userId, session);
+};
+
 export {
   addUserSessionFromAuth,
+  deleteUserSessionFromAuth,
   getUserDocumentFromAuth,
   getUserSessionsFromAuth,
   registerUserWithEmailAndPassword,
