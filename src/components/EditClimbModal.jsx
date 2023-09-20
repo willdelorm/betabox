@@ -48,7 +48,7 @@ const EditClimbModal = ({
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>
               <h3>{`V${data.grade}`}</h3>
             </Form.Label>
@@ -61,7 +61,7 @@ const EditClimbModal = ({
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
@@ -71,7 +71,7 @@ const EditClimbModal = ({
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicNotes">
+          <Form.Group className="mb-3">
             <Form.Label>Notes</Form.Label>
             <Form.Control
               type="text"
@@ -81,7 +81,7 @@ const EditClimbModal = ({
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasiEffort">
+          <Form.Group className="mb-3">
             <Form.Label>
               {"RPE: "}
               <span className="fs-2 fw-bold">{data.effort}</span>
@@ -99,7 +99,6 @@ const EditClimbModal = ({
             <Form.Label>Style</Form.Label>
             <Form.Group
               className="mb-3 btn-group btn-group-toggle border"
-              controlId="formBasicStyles"
               data-toggle="buttons"
             >
               <Form.Label

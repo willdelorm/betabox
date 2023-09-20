@@ -4,7 +4,7 @@ import { addUserSessionFromAuth } from "../utils/firebase.utils";
 
 import { Button, Form, Modal } from "react-bootstrap";
 
-const SessionModal = ({ isShow, setShow, climbs }) => {
+const SessionModal = ({ isShow, setShow, climbs, togglePause }) => {
   const [session, setSession] = useState({
     title: "",
     notes: "",
@@ -22,6 +22,11 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
   };
 
   const navigate = useNavigate();
+
+  const handleResume = () => {
+    setShow(false);
+    togglePause();
+  };
 
   const handleSubmitSession = async (e) => {
     e.preventDefault();
@@ -56,7 +61,7 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmitSession}>
-          <Form.Group className="mb-3" controlId="session-title">
+          <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
@@ -66,7 +71,7 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="session-notes">
+          <Form.Group className="mb-3">
             <Form.Label>Session Notes</Form.Label>
             <Form.Control
               as="textarea"
@@ -77,7 +82,7 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="session-location">
+          <Form.Group className="mb-3">
             <Form.Label>Location</Form.Label>
             <Form.Control
               type="text"
@@ -91,7 +96,7 @@ const SessionModal = ({ isShow, setShow, climbs }) => {
             variant="light"
             size="lg"
             className="w-100 rounded-0"
-            onClick={() => setShow(false)}
+            onClick={handleResume}
           >
             Resume
           </Button>

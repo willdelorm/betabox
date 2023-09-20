@@ -45,7 +45,7 @@ const RegisterForm = ({ onHide }) => {
 
   return (
     <Form action="/home" onSubmit={handleRegister}>
-      <Form.Group className="mb-3" controlId="registerEmail">
+      <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -56,7 +56,7 @@ const RegisterForm = ({ onHide }) => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="registerPassword">
+      <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
@@ -67,7 +67,7 @@ const RegisterForm = ({ onHide }) => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="registerPassword2">
+      <Form.Group className="mb-3">
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control
           type="password"
@@ -78,7 +78,7 @@ const RegisterForm = ({ onHide }) => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      <Form.Group className="mb-3">
         <Form.Check type="checkbox" label="I agree to sign up" required />
       </Form.Group>
 

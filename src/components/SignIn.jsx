@@ -36,7 +36,7 @@ const SignInForm = ({ onHide }) => {
 
   return (
     <Form action="/home" onSubmit={handleSignIn}>
-      <Form.Group className="mb-3" controlId="signInEmail">
+      <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -47,7 +47,7 @@ const SignInForm = ({ onHide }) => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="signInPassword">
+      <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
