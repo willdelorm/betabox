@@ -144,6 +144,7 @@ const NewSession = () => {
           deleteClimb={handleDeleteClimb}
           handleSubmit={handleUpdateClimb}
           onHide={() => setModalShow(false)}
+          gradesArr={BOULDERING_GRADES}
         />
       </div>
 

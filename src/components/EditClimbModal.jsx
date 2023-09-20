@@ -10,6 +10,7 @@ const EditClimbModal = ({
   deleteClimb,
   handleSubmit,
   onHide,
+  gradesArr,
 }) => {
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -54,7 +55,7 @@ const EditClimbModal = ({
             </Form.Label>
             <Form.Range
               min={0}
-              max={10}
+              max={gradesArr.length - 1}
               name="grade"
               value={data.grade}
               onChange={handleChange}
