@@ -58,6 +58,7 @@ const EditClimbModal = ({
               name="grade"
               value={data.grade}
               onChange={handleChange}
+              className="slider-color"
             />
           </Form.Group>
 
@@ -92,6 +93,7 @@ const EditClimbModal = ({
               name="effort"
               value={data.effort}
               onChange={handleChange}
+              className="slider-color"
             />
           </Form.Group>
 
@@ -180,30 +182,34 @@ const EditClimbModal = ({
             </Form.Group>
           </Form.Group>
 
-          <Form.Group className="mb-3 d-flex justify-content-between">
-            <Form.Label>{"Attempts: " + data.attempts}</Form.Label>
-            <ButtonGroup aria-label="Basic example">
-              <Button
-                variant="warning"
-                onClick={() =>
-                  setData({ ...data, attempts: data.attempts + 1 })
-                }
-              >
-                +
-              </Button>
-              <Button
-                variant="warning"
-                onClick={() =>
-                  setData({
-                    ...data,
-                    attempts: data.attempts > 1 ? data.attempts - 1 : 1,
-                  })
-                }
-              >
-                -
-              </Button>
-            </ButtonGroup>
-          </Form.Group>
+          {(data.style === "Project" || data.style === "Redpoint") && (
+            <Form.Group className="mb-3 d-flex justify-content-between">
+              <Form.Label>{"Attempts: " + data.attempts}</Form.Label>
+              <div>
+                <Button
+                  variant="warning"
+                  onClick={() =>
+                    setData({ ...data, attempts: data.attempts + 1 })
+                  }
+                  className="attempts-btn fs-1 fw-bold mx-1"
+                >
+                  +
+                </Button>
+                <Button
+                  variant="warning"
+                  onClick={() =>
+                    setData({
+                      ...data,
+                      attempts: data.attempts > 1 ? data.attempts - 1 : 1,
+                    })
+                  }
+                  className="attempts-btn fs-1 fw-bold"
+                >
+                  -
+                </Button>
+              </div>
+            </Form.Group>
+          )}
 
           <Button
             variant="light"

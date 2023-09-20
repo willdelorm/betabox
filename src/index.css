@@ -39,3 +39,32 @@ p {
 .session-list {
   max-height: 40vh;
 }
+
+.slider-color::-webkit-slider-thumb {
+  background: #f6d10b;
+}
+
+.slider-color::-moz-range-thumb {
+  background: #f6d10b;
+}
+
+.slider-color::-ms-thumb {
+  background: #f6d10b;
+}
+
+.slider-color::-webkit-slider-thumb:active {
+  background: #f1df78;
+}
+
+.slider-color::-webkit-slider-thumb,
+.custom-range:focus::-webkit-slider-thumb,
+.custom-range:focus::-moz-range-thumb,
+.custom-range:focus::-ms-thumb {
+  box-shadow: #f1df78;
+}
+
+.attempts-btn {
+  height: 50px;
+  width: 50px;
+  line-height: 1;
+}
