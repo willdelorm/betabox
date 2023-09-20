@@ -27,28 +27,59 @@ const History = () => {
     });
   }, []);
 
+  const emptySessionsList = <p>No sessions recorded.</p>;
+
+  const sessionsListView = sessions.length
+    ? sessions.map((session) => (
+        <SessionsListItem
+          key={session.id}
+          session={session}
+          handleClick={() => loadModal(session, setModalData, setModalShow)}
+        />
+      ))
+    : emptySessionsList;
+
+  const allClimbs = sessions.reduce((climbs, session) => {
+    return climbs.concat(session.climbs);
+  }, []);
+  const maxSendGrade = allClimbs.reduce((maxGrade, climb) => {
+    return climb.grade > maxGrade ? climb.grade : maxGrade;
+  }, 0);
+  const avgRpe =
+    allClimbs.reduce((totalRpe, climb) => {
+      return totalRpe + climb.effort;
+    }, 0) / allClimbs.length;
+  const avgV = Math.floor(
+    allClimbs.reduce((totalV, climb) => {
+      return totalV + climb.grade;
+    }, 0) / allClimbs.length
+  );
+
   return (
     <Layout theme="dark">
       <div className="m-3 flex-grow-1 overflow-auto">
         <h2 className="fs-6 mb-3">All Sessions</h2>
 
         <div className="stats d-flex justify-content-between mb-3">
-          <HistoryStat name="max send" value="v7" />
-          <HistoryStat name="climbs" value="400" />
-          <HistoryStat name="avg rpe" value="6" />
-          <HistoryStat name="avg v" value="v4" />
+          <HistoryStat
+            name="max send"
+            value={sessions.length === 0 ? "--" : `V${maxSendGrade}`}
+          />
+          <HistoryStat
+            name="climbs"
+            value={sessions.length === 0 ? "--" : allClimbs.length}
+          />
+          <HistoryStat
+            name="avg rpe"
+            value={sessions.length === 0 ? "--" : avgRpe}
+          />
+          <HistoryStat
+            name="avg v"
+            value={sessions.length === 0 ? "--" : `V${avgV}`}
+          />
         </div>
 
-        <ListGroup variant="flush">
-          {sessions.length &&
-            sessions.map((session) => (
-              <SessionsListItem
-                key={session.id}
-                session={session}
-                handleClick={() => loadModal(session)}
-              />
-            ))}
-        </ListGroup>
+        <ListGroup variant="flush">{sessionsListView}</ListGroup>
       </div>
       <Button
         variant="dark"
