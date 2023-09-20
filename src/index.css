@@ -35,3 +35,7 @@ p {
 .graph-container {
   height: 160px;
 }
+
+.session-list {
+  max-height: 40vh;
+}

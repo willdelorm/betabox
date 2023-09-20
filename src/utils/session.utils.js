@@ -17,11 +17,20 @@ const getProjectsCount = (climbs) => {
   return climbs.filter((climb) => climb.style === "Project").length;
 };
 
+const getAvgRpe = (climbs) => {
+  return (
+    climbs.reduce((totalRpe, climb) => {
+      return totalRpe + climb.effort;
+    }, 0) / climbs.length
+  );
+};
+
 export const sessionStats = (climbs) => {
   return {
     problemsCount: getProblemsCount(climbs),
     vSum: getVSum(climbs),
     avgV: getAvgV(climbs),
     projectsCount: getProjectsCount(climbs),
+    avgRpe: getAvgRpe(climbs),
   };
 };

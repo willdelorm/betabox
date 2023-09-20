@@ -29,9 +29,9 @@ const SessionsListItem = ({ session, handleClick }) => {
   const { problemsCount, avgV, projectsCount } = sessionStats(climbs);
   const sessionTime = calculateSessionTime(startTime, endTime);
 
-  const statsPreview = `${sessionTime} • ${problemsCount} problems • V${avgV} average ${
-    projectsCount ? `• ${projectsCount} projects` : ""
-  }`;
+  let statsPreview = `${sessionTime} • ${problemsCount} problems • V${avgV} average`;
+  const projectsStat = `${projectsCount ? `• ${projectsCount} projects` : ""}`;
+  statsPreview += projectsStat;
 
   return (
     <ListGroup.Item

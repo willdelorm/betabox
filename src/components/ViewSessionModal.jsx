@@ -1,16 +1,19 @@
 import { Button, ListGroup, Modal } from "react-bootstrap";
+import { sessionStats } from "../utils/session.utils";
 
 import HistoryStat from "./HistoryStat";
 
 const ViewSessionModal = ({ show, data, handleHide }) => {
   const { climbs, endTime, id, location, notes, startTime, title } = data;
+  const { problemsCount, vSum, avgRpe, avgV } = sessionStats(climbs);
 
   return (
     <Modal
       show={show}
-      size="lg"
+      // size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      // dialogClassName="session-modal"
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100">
@@ -23,25 +26,36 @@ const ViewSessionModal = ({ show, data, handleHide }) => {
       </Modal.Header>
       <Modal.Body className="p-0 pt-3">
         <div className="d-flex justify-content-around align-items-center mb-3">
-          <HistoryStat name="vsum" value="2" />
-          <HistoryStat name="density" value=".03" />
-          <HistoryStat name="climbs" value="3" />
-          <HistoryStat name="avg rpe" value="4.6" />
+          <HistoryStat name="vsum" value={vSum} />
+          <HistoryStat name="avg v" value={`V${avgV}`} />
+          <HistoryStat name="climbs" value={problemsCount} />
+          <HistoryStat name="avg rpe" value={avgRpe} />
         </div>
 
-        <div className="m-3 flex-grow-1 overflow-auto">
+        <div className="m-3 flex-grow-1">
           <h2 className="fs-6">Session Log:</h2>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="session-list overflow-auto">
             {climbs.length
               ? climbs.map((climb) => {
                   const { attempts, effort, grade, id, name, note, style } =
                     climb;
 
+                  const summaryArr = [];
+                  if (name !== "") {
+                    summaryArr.push(name);
+                  }
+                  if (style === "Project" || style === "Redpoint") {
+                    summaryArr.push(`${attempts} attempts`);
+                  }
+                  summaryArr.push(`RPE: ${effort}`);
+
+                  const summary = summaryArr.join(" • ");
+
                   return (
                     <ListGroup.Item key={id} className="gap-3 mb-3 px-0">
                       <div className="d-flex justify-content-between mb-2">
                         <span className="fw-bold text-left me-3">{`V${grade}`}</span>
-                        <span className="flex-grow-1">{`${name} - ${attempts} attempts - RPE: ${effort}`}</span>
+                        <span className="flex-grow-1">{summary}</span>
                         <span className="fw-bold">{style}</span>
                       </div>
                       <p>
