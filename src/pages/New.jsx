@@ -4,15 +4,15 @@
 import { useEffect, useReducer, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 
-import Layout from "../../components/Layout";
-import Timer from "../../components/Timer";
-import LogButton from "../../components/LogButton";
-import LoggedClimbRow from "../../components/LoggedClimbRow";
-import ControlButton from "../../components/ControlButton";
-import EditClimbModal from "../../components/EditClimbModal";
-import SessionModal from "../../components/SessionModal";
+import Layout from "../components/Layout";
+import Timer from "../components/Timer";
+import LogButton from "../components/LogButton";
+import LoggedClimbRow from "../components/LoggedClimbRow";
+import ControlButton from "../components/ControlButton";
+import EditClimbModal from "../components/EditClimbModal";
+import SessionModal from "../components/SessionModal";
 
-import climbsReducer from "../../reducers/climbsReducer";
+import climbsReducer from "../reducers/climbsReducer";
 
 const BOULDERING_GRADES = [
   "V0",
