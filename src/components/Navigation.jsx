@@ -25,8 +25,8 @@ const Navigation = ({ theme }) => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/home">Dashboard</Nav.Link>
-            <Nav.Link href="/history">History</Nav.Link>
+            <Nav.Link onClick={() => navigate("/home")}>Dashboard</Nav.Link>
+            <Nav.Link onClick={() => navigate("/history")}>History</Nav.Link>
             <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>

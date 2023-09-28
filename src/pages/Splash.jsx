@@ -12,7 +12,7 @@ const Splash = () => {
   return (
     <div className="h-100 d-flex flex-column justify-content-end">
       <div className="h-75 d-flex flex-column justify-content-between align-items-center">
-        <Image src="/logo.png" />
+        <Image src="logo.png" />
         <div className="w-100">
           <Button
             variant="light"

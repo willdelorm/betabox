@@ -57,7 +57,7 @@ const Home = () => {
         variant="dark"
         size="lg"
         className="w-100 rounded-0"
-        onClick={() => navigate("/sessions/new")}
+        onClick={() => navigate("/new")}
       >
         Start a session
       </Button>
