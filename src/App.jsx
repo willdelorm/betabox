@@ -7,7 +7,7 @@ import History from "./pages/History";
 
 function App() {
   return (
-    <div className="w-100 vh-100 bg-light">
+    <div className="bg-light container-fluid vh-100">
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/home" element={<Home />} />
