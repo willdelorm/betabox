@@ -9,7 +9,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Layout from "../components/Layout";
 import SessionsListItem from "../components/SessionsListItem";
 import ViewSessionModal from "../components/ViewSessionModal";
-import ActivityContainer from "../components/ActivityContainer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ const Home = () => {
 
   return (
     <Layout theme="dark">
-      <ActivityContainer sessions={sessions} />
       <div className="m-3 mt-0 flex-grow-1 overflow-auto">
         <h2 className="fs-6 mb-3">Recent Sessions</h2>
 

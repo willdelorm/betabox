@@ -39,7 +39,7 @@ const NewSession = () => {
     : 0;
   let avgV = climbs.length
     ? Math.floor(
-        climbs.reduce((acc, climb) => (acc += climb.grade), 0) / climbs.length
+        climbs.reduce((acc, climb) => (acc += climb.grade), 0) / climbs.length,
       )
     : 0;
 
@@ -110,72 +110,74 @@ const NewSession = () => {
   };
 
   return (
-    <Layout theme="light">
-      {/* Stats */}
-      <div className="bg-body-secondary mx-3 p-3">
-        <Timer time={time} />
-        <div className="d-flex justify-content-between fs-6">
-          <span>{`Problems: ${problemCount}`}</span>
-          <span>{`V Sum: ${vSum}`}</span>
-          <span>{`Avg V: ${avgV}`}</span>
+    <main className="w-100 mx-auto d-flex flex-column justify-items-center">
+      <Layout theme="dark">
+        {/* Stats */}
+        <div className="bg-body-secondary p-3">
+          <Timer time={time} />
+          <div className="d-flex justify-content-between fs-6">
+            <span>{`Problems: ${problemCount}`}</span>
+            <span>{`V Sum: ${vSum}`}</span>
+            <span>{`Avg V: ${avgV}`}</span>
+          </div>
         </div>
-      </div>
 
-      {/* Session Log */}
-      <div className="m-3 flex-grow-1 overflow-auto">
-        <h2>Session Log:</h2>
-        <ListGroup variant="flush">
-          {climbs.length ? (
-            climbs.map((loggedClimb) => (
-              <LoggedClimbRow
-                key={loggedClimb.id}
-                details={loggedClimb}
-                handleClick={() => handleOpenModal(loggedClimb)}
-              />
-            ))
-          ) : (
-            <p>Nothing recorded yet</p>
-          )}
-        </ListGroup>
-        <EditClimbModal
-          show={modalShow}
-          data={editingData}
-          setData={setEditingData}
-          deleteClimb={handleDeleteClimb}
-          handleSubmit={handleUpdateClimb}
-          onHide={() => setModalShow(false)}
-          gradesArr={BOULDERING_GRADES}
-        />
-      </div>
+        {/* Session Log */}
+        <div className="m-3 flex-grow-1 overflow-auto">
+          <h2>Session Log:</h2>
+          <ListGroup variant="flush">
+            {climbs.length ? (
+              climbs.map((loggedClimb) => (
+                <LoggedClimbRow
+                  key={loggedClimb.id}
+                  details={loggedClimb}
+                  handleClick={() => handleOpenModal(loggedClimb)}
+                />
+              ))
+            ) : (
+              <p>Nothing recorded yet</p>
+            )}
+          </ListGroup>
+          <EditClimbModal
+            show={modalShow}
+            data={editingData}
+            setData={setEditingData}
+            deleteClimb={handleDeleteClimb}
+            handleSubmit={handleUpdateClimb}
+            onHide={() => setModalShow(false)}
+            gradesArr={BOULDERING_GRADES}
+          />
+        </div>
 
-      {/* Log Button Grid */}
-      <div className="log-btn-grid my-3">
-        {BOULDERING_GRADES.map((grade, index) => (
-          <LogButton key={index} grade={grade} handleClick={handleAddClimb} />
-        ))}
-      </div>
+        {/* Log Button Grid */}
+        <div className="d-flex flex-wrap my-3">
+          {BOULDERING_GRADES.map((grade, index) => (
+            <LogButton key={index} grade={grade} handleClick={handleAddClimb} />
+          ))}
+        </div>
 
-      {/* Play Controls */}
-      <div className="d-flex justify-content-around my-3">
-        <ControlButton
-          name={isPaused ? "play" : "pause"}
-          handleClick={togglePause}
+        {/* Play Controls */}
+        <div className="d-flex justify-content-around my-3">
+          <ControlButton
+            name={isPaused ? "play" : "pause"}
+            handleClick={togglePause}
+          />
+          <ControlButton name="stop" handleClick={handleStop} />
+          <ControlButton
+            name="undo"
+            handleClick={() =>
+              climbs.length ? handleDeleteClimb(climbs[0].id) : null
+            }
+          />
+        </div>
+        <SessionModal
+          isShow={sessionModalShow}
+          setShow={setSessionModalShow}
+          climbs={climbs}
+          togglePause={togglePause}
         />
-        <ControlButton name="stop" handleClick={handleStop} />
-        <ControlButton
-          name="undo"
-          handleClick={() =>
-            climbs.length ? handleDeleteClimb(climbs[0].id) : null
-          }
-        />
-      </div>
-      <SessionModal
-        isShow={sessionModalShow}
-        setShow={setSessionModalShow}
-        climbs={climbs}
-        togglePause={togglePause}
-      />
-    </Layout>
+      </Layout>
+    </main>
   );
 };
 
