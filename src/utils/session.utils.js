@@ -9,7 +9,7 @@ const getVSum = (climbs) => {
 const getAvgV = (climbs) => {
   return climbs.length
     ? Math.floor(
-        climbs.reduce((acc, climb) => (acc += climb.grade), 0) / climbs.length
+        climbs.reduce((acc, climb) => (acc += climb.grade), 0) / climbs.length,
       )
     : 0;
 };
@@ -18,10 +18,10 @@ const getProjectsCount = (climbs) => {
 };
 
 const getAvgRpe = (climbs) => {
-  return (
+  return Math.floor(
     climbs.reduce((totalRpe, climb) => {
       return totalRpe + climb.effort;
-    }, 0) / climbs.length
+    }, 0) / climbs.length,
   );
 };
 

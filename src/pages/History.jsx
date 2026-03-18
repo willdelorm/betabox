@@ -45,14 +45,15 @@ const History = () => {
   const maxSendGrade = allClimbs.reduce((maxGrade, climb) => {
     return climb.grade > maxGrade ? climb.grade : maxGrade;
   }, 0);
-  const avgRpe =
+  const avgRpe = Math.floor(
     allClimbs.reduce((totalRpe, climb) => {
       return totalRpe + climb.effort;
-    }, 0) / allClimbs.length;
+    }, 0) / allClimbs.length,
+  );
   const avgV = Math.floor(
     allClimbs.reduce((totalV, climb) => {
       return totalV + climb.grade;
-    }, 0) / allClimbs.length
+    }, 0) / allClimbs.length,
   );
 
   return (
