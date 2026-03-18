@@ -1,70 +1,9 @@
-/*body {
-  max-width: 576px;
-  margin: 0 auto;
+.app-container {
+    width: 100%;
 }
 
-p {
-  margin: 0;
+@media (min-width: 768px) {
+    .app-container {
+        max-width: 400px;
+    }
 }
-
-.log-btn-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  row-gap: 1rem;
-}
-
-.log-btn {
-  background-color: #f6d10b;
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 50px;
-  text-align: center;
-
-  margin: 0 auto;
-  width: 50px;
-}
-
-.fs-7 {
-  font-size: 14px;
-}
-
-.fs-8 {
-  font-size: 12px;
-}
-
-.graph-container {
-  height: 160px;
-}
-
-.session-list {
-  max-height: 40vh;
-}
-
-.slider-color::-webkit-slider-thumb {
-  background: #f6d10b;
-}
-
-.slider-color::-moz-range-thumb {
-  background: #f6d10b;
-}
-
-.slider-color::-ms-thumb {
-  background: #f6d10b;
-}
-
-.slider-color::-webkit-slider-thumb:active {
-  background: #f1df78;
-}
-
-.slider-color::-webkit-slider-thumb,
-.custom-range:focus::-webkit-slider-thumb,
-.custom-range:focus::-moz-range-thumb,
-.custom-range:focus::-ms-thumb {
-  box-shadow: #f1df78;
-}
-
-.attempts-btn {
-  height: 50px;
-  width: 50px;
-  line-height: 1;
-}*/

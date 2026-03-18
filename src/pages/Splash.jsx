@@ -10,7 +10,7 @@ const Splash = () => {
   const [showSignIn, setShowSignIn] = useState(false);
 
   return (
-    <main className="w-25 mx-auto py-5 d-flex flex-column justify-items-center">
+    <main className="app-container mx-auto py-5 d-flex flex-column justify-items-center">
       <Image src="logo.png" fluid className="mb-5" />
       <div className="d-flex justify-content-between">
         <Button variant="light" size="lg" onClick={() => setShowRegister(true)}>
